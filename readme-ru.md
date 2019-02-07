@@ -109,7 +109,7 @@ class CreateUserAction extends Action
 }
 ```
 
-## Install 
+## Установка 
 
 Установка через composer:
 
@@ -117,7 +117,7 @@ class CreateUserAction extends Action
 composer require slexx/laravel-actions
 ```
 
-После обновления composer, добавте поставщика услуг в массив `providers` в файлу `config/app.php`
+После обновления composer, добавте поставщика услуг в массив `providers` в файле `config/app.php`
 
 ```
 Slexx\LaravelActions\ActionsServiceProvider::class,
