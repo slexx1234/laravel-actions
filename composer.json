@@ -1,0 +1,25 @@
+{
+    "name": "slexx/laravel-actions",
+    "description": "Actions for laravel",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "laravel",
+        "actions",
+        "callable"
+    ],
+    "authors": [
+        {
+            "name": "Alex",
+            "email": "slexx1234@gmail.com"
+        }
+    ],
+    "require": {
+        "laravel/framework": "^5.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Slexx\\Actions\\": "src/"
+        }
+    }
+}

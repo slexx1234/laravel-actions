@@ -1,0 +1,22 @@
+<?php
+
+namespace DummyNamespace;
+
+use App\DummyModel;
+use Slexx\Actions\Action;
+
+class DummyAction extends Action
+{
+    /**
+     * @param int $id
+     * @return bool
+     */
+    public function execute(int $id)
+    {
+        $dummyModel = DummyModel::findOrFail($id);
+
+        $dummyModel->delete();
+
+        return true;
+    }
+}

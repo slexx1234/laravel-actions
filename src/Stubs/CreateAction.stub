@@ -1,0 +1,20 @@
+<?php
+
+namespace DummyNamespace;
+
+use App\DummyModel;
+use Slexx\Actions\Action;
+
+class DummyAction extends Action
+{
+    /**
+     * @param array $data
+     * @return DummyModel
+     */
+    public function execute(array $data)
+    {
+        $dummyModel = DummyModel::create($data);
+
+        return $dummyModel;
+    }
+}
