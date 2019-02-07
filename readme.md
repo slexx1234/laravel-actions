@@ -92,7 +92,7 @@ This generates the following code:
 namespace App\Actions\Users;
 
 use App\User;
-use Slexx\Actions\Action;
+use Slexx\LaravelActions\Action;
 
 class CreateUserAction extends Action
 {
@@ -120,6 +120,6 @@ composer require slexx/laravel-actions
 After updating composer, add the service provider to the `providers` array in `config/app.php`
 
 ```
-Slexx\Actions\ActionsServiceProvider::class,
+Slexx\LaravelActions\ActionsServiceProvider::class,
 ```
 

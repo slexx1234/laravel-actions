@@ -92,7 +92,7 @@ php artisan make:action Users/CreateUserAction
 namespace App\Actions\Users;
 
 use App\User;
-use Slexx\Actions\Action;
+use Slexx\LaravelActions\Action;
 
 class CreateUserAction extends Action
 {
@@ -120,6 +120,6 @@ composer require slexx/laravel-actions
 После обновления composer, добавте поставщика услуг в массив `providers` в файлу `config/app.php`
 
 ```
-Slexx\Actions\ActionsServiceProvider::class,
+Slexx\LaravelActions\ActionsServiceProvider::class,
 ```
 

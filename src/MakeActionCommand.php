@@ -1,6 +1,6 @@
 <?php
 
-namespace Slexx\Actions;
+namespace Slexx\LaravelActions;
 
 use function GuzzleHttp\Psr7\str;
 use Illuminate\Console\Command;

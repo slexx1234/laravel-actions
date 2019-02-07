@@ -1,6 +1,6 @@
 <?php
 
-namespace Slexx\Actions;
+namespace Slexx\LaravelActions;
 
 use Illuminate\Support\ServiceProvider;
 

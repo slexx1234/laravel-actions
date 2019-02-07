@@ -2,7 +2,7 @@
 
 namespace DummyNamespace;
 
-use Slexx\Actions\Action;
+use Slexx\LaravelActions\Action;
 
 class DummyAction extends Action
 {
