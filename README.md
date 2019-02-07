@@ -1,13 +1,13 @@
-# laravel-action [English](https://github.com/slexx1234/laravel-actions/blob/master/readme.md)
+# laravel-action [Русский](https://github.com/slexx1234/laravel-actions/blob/master/RU.md)
 
-## Использование
+## Usage
 
-### Проблема
+### Problem
 
-Большинство приложений имеют несколько точек входа. Например, форма для создания пользователя,
-API для мобильного приложения и даже может быть команда для создания пользователей.
+Most applications have multiple entry points. For example, a form for creating a user, an 
+API for a mobile application, and there may even be a command for creating users.
 
-Тогда возникает проблема повторения фрагментов кода.
+Then there is the problem of repeating pieces of code.
 
 ```php
 class UserController 
@@ -40,9 +40,9 @@ class UserApiController
 
 ### Solution
 
-Недавно я обнаружил элегантное решение этой проблемы, прочитав статью на [medium](https://medium.com/@remi_collin/keeping-your-laravel-applications-dry-with-single-action-classes-6a950ec54d1d).
+I recently discovered an elegant solution to this problem by reading an article on [medium](https://medium.com/@remi_collin/keeping-your-laravel-applications-dry-with-single-action-classes-6a950ec54d1d).
 
-Повторение удаляется добавлением нового класса:
+Repetition is removed by adding new class:
 
 ```php
 class UserCreateAction 
@@ -76,15 +76,15 @@ class UserApiController
 }
 ```
 
-### Что же делает пакет?
+### So what does the package do?
 
-Он добовляет одну комманду `make:action`!
+It adds one irreplaceable command `make:action`!
 
 ```
 php artisan make:action Users/CreateUserAction
 ```
 
-Это сгенерирует следующий код:
+This generates the following code:
 
 ```php
 <?php
@@ -109,15 +109,15 @@ class CreateUserAction extends Action
 }
 ```
 
-## Установка 
+## Install 
 
-Установка через composer:
+You can install this package via composer:
 
 ```
 composer require slexx/laravel-actions
 ```
 
-После обновления composer, добавте поставщика услуг в массив `providers` в файле `config/app.php`
+After updating composer, add the service provider to the `providers` array in `config/app.php`
 
 ```
 Slexx\LaravelActions\ActionsServiceProvider::class,
