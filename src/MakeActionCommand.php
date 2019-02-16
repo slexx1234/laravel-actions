@@ -75,10 +75,10 @@ class MakeActionCommand extends GeneratorCommand
         $name = $this->argument('name');
 
         $stub = parent::replaceClass($stub, $name);
-        $stub = str_replace('DummyNamespace', $this->getNamespace($name), $stub);
-        $stub = str_replace('DummyAction', $this->getClassName(), $stub);
-        $stub = str_replace('DummyModel', $this->getModel(), $stub);
-        $stub = str_replace('dummyModel', lcfirst($this->getModel()), $stub);
+        $stub = str_replace('$Namespace$', $this->getNamespace($name), $stub);
+        $stub = str_replace('$Class$', $this->getClassName(), $stub);
+        $stub = str_replace('$Model$', $this->getModel(), $stub);
+        $stub = str_replace('$model$', lcfirst($this->getModel()), $stub);
 
         return $stub;
     }

@@ -1,23 +1,23 @@
 <?php
 
-namespace DummyNamespace;
+namespace $Namespace$;
 
-use App\DummyModel;
+use App\$Model$;
 use Slexx\LaravelActions\Action;
 
-class DummyAction extends Action
+class $Class$ extends Action
 {
     /**
      * @param int $id
      * @param array $data
-     * @return DummyModel
+     * @return $Model$
      */
     public function execute(int $id, array $data)
     {
-        $dummyModel = DummyModel::findOrFail($id);
+        $$model$ = $Model$::findOrFail($id);
 
-        $dummyModel->update($data);
+        $$model$->update($data);
 
-        return $dummyModel;
+        return $$model$;
     }
 }

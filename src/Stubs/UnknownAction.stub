@@ -1,10 +1,10 @@
 <?php
 
-namespace DummyNamespace;
+namespace $Namespace$;
 
 use Slexx\LaravelActions\Action;
 
-class DummyAction extends Action
+class $Class$ extends Action
 {
     /**
      * @return mixed

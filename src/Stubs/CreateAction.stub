@@ -1,20 +1,20 @@
 <?php
 
-namespace DummyNamespace;
+namespace $Namespace$;
 
-use App\DummyModel;
+use App\$Model$;
 use Slexx\LaravelActions\Action;
 
-class DummyAction extends Action
+class $Class$ extends Action
 {
     /**
      * @param array $data
-     * @return DummyModel
+     * @return $Model$
      */
     public function execute(array $data)
     {
-        $dummyModel = DummyModel::create($data);
+        $$model$ = $Model$::create($data);
 
-        return $dummyModel;
+        return $$model$;
     }
 }

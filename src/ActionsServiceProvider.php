@@ -25,6 +25,8 @@ class ActionsServiceProvider extends ServiceProvider
             ]);
 
             if (class_exists('\\Nwidart\\Modules\\Facades\\Module')) {
+                config()->set('modules.paths.generator.actions', ['path' => 'Actions', 'generate' => false]);
+
                 $this->commands([
                     MakeModuleActionCommand::class,
                 ]);
