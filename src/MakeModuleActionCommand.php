@@ -5,14 +5,14 @@ namespace Slexx\LaravelActions;
 use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Input\InputArgument;
 
-class MakeActionCommand extends GeneratorCommand
+class MakeModuleActionCommand extends GeneratorCommand
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'make:action {name}';
+    protected $signature = 'module:make-action {name} {module}';
 
     /**
      * The console command description.
@@ -52,7 +52,16 @@ class MakeActionCommand extends GeneratorCommand
     {
         return [
             ['name', InputArgument::REQUIRED, 'The class name of the action.'],
+            ['module', InputArgument::REQUIRED, 'The module name.'],
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function moduleName()
+    {
+        return $this->argument('module');
     }
 
     /**
@@ -60,7 +69,7 @@ class MakeActionCommand extends GeneratorCommand
      */
     public function getFileName()
     {
-        return app_path('Actions') . '/' . ltrim(str_replace('\\', '/', $this->argument('class')), '/') . '.php';
+        return base_path('Modules/' . $this->moduleName() . '/Actions') . '/' . ltrim(str_replace('\\', '/', $this->argument('class')), '/') . '.php';
     }
 
     /**
@@ -104,7 +113,7 @@ class MakeActionCommand extends GeneratorCommand
      */
     public function getDefaultNameSpace($rootNamespace)
     {
-        return $rootNamespace . '\\Actions';
+        return 'Modules\\' . $this->moduleName() . '\\Actions';
     }
 
     /**

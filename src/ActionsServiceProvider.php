@@ -23,6 +23,12 @@ class ActionsServiceProvider extends ServiceProvider
             $this->commands([
                 MakeActionCommand::class,
             ]);
+
+            if (class_exists('\\Nwidart\\Modules\\Facades\\Module')) {
+                $this->commands([
+                    MakeModuleActionCommand::class,
+                ]);
+            }
         }
     }
 }
