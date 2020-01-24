@@ -5,7 +5,7 @@ namespace Slexx\LaravelActions;
 use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Input\InputArgument;
 
-class MakeActionCommand extends GeneratorCommand
+class MakeModuleActionCommand extends GeneratorCommand
 {
     /**
      * The name and signature of the console command.
