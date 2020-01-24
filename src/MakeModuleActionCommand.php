@@ -2,12 +2,12 @@
 
 namespace Slexx\LaravelActions;
 
-use Nwidart\Modules\Commands\GeneratorCommand;
 use Illuminate\Support\Str;
-use Nwidart\Modules\Support\Config\GenerateConfigReader;
 use Nwidart\Modules\Support\Stub;
+use Nwidart\Modules\Commands\GeneratorCommand;
 use Nwidart\Modules\Traits\ModuleCommandTrait;
 use Symfony\Component\Console\Input\InputArgument;
+use Nwidart\Modules\Support\Config\GenerateConfigReader;
 
 class MakeModuleActionCommand extends GeneratorCommand
 {
