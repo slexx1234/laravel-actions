@@ -2,37 +2,36 @@
 
 namespace Slexx\LaravelActions;
 
-use Illuminate\Support\Str;
-use Nwidart\Modules\Support\Stub;
-use Nwidart\Modules\Commands\GeneratorCommand;
-use Nwidart\Modules\Traits\ModuleCommandTrait;
+use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Input\InputArgument;
-use Nwidart\Modules\Support\Config\GenerateConfigReader;
 
-class MakeModuleActionCommand extends GeneratorCommand
+class MakeActionCommand extends GeneratorCommand
 {
-    use ModuleCommandTrait;
-
     /**
-     * The name of argument name.
+     * The name and signature of the console command.
      *
      * @var string
      */
-    protected $argumentName = 'name';
-
-    /**
-     * The console command name.
-     *
-     * @var string
-     */
-    protected $name = 'module:make-action';
+    protected $signature = 'make:action {name}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a new action class.';
+    protected $description = 'Create a new action class';
+
+    /**
+     * The type of class being generated.
+     *
+     * @var string
+     */
+    protected $type = 'Action';
+
+    /**
+     * @var null|string
+     */
+    protected $className = null;
 
     /**
      * @var null|string
@@ -44,11 +43,6 @@ class MakeModuleActionCommand extends GeneratorCommand
      */
     protected $model = null;
 
-    public function getDefaultNamespace(): string
-    {
-        return $this->laravel['modules']->config('paths.generator.actions.path', 'Actions');
-    }
-
     /**
      * Get the console command arguments.
      *
@@ -57,21 +51,43 @@ class MakeModuleActionCommand extends GeneratorCommand
     protected function getArguments()
     {
         return [
-            ['name', InputArgument::REQUIRED, 'The name of the action class.'],
-            ['module', InputArgument::OPTIONAL, 'The name of module will be used.'],
+            ['name', InputArgument::REQUIRED, 'The class name of the action.'],
         ];
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    protected function getTemplateContents()
+    public function getFileName()
     {
-        $module = $this->laravel['modules']->findOrFail($this->getModuleName());
+        return app_path('Actions') . '/' . ltrim(str_replace('\\', '/', $this->argument('class')), '/') . '.php';
+    }
 
-        $stub = file_get_contents($this->getStub());
-        $stub = str_replace('$Namespace$', $this->getClassNamespace($module), $stub);
-        $stub = str_replace('$Class$', $this->getClass(), $stub);
+    /**
+     * Get the full namespace for a given class, without the class name.
+     *
+     * @param  string  $name
+     * @return string
+     */
+    protected function getNamespace($name)
+    {
+        return $this->getDefaultNameSpace($this->laravel->getNamespace()) . '\\' . trim(implode('\\', array_slice(preg_split("~[\\\/]~", $name), 0, -1)), '\\');
+    }
+
+    /**
+     * Replace the class name for the given stub.
+     *
+     * @param  string  $stub
+     * @param  string  $name
+     * @return string
+     */
+    protected function replaceClass($stub, $name)
+    {
+        $name = $this->argument('name');
+
+        $stub = parent::replaceClass($stub, $name);
+        $stub = str_replace('$Namespace$', $this->getNamespace($name), $stub);
+        $stub = str_replace('$Class$', $this->getClassName(), $stub);
         $stub = str_replace('$Model$', $this->getModel(), $stub);
         $stub = str_replace('$model$', lcfirst($this->getModel()), $stub);
 
@@ -94,23 +110,21 @@ class MakeModuleActionCommand extends GeneratorCommand
     }
 
     /**
-     * @return mixed
+     * @param string $rootNamespace
+     * @return string
      */
-    protected function getDestinationFilePath()
+    public function getDefaultNameSpace($rootNamespace)
     {
-        $path = $this->laravel['modules']->getModulePath($this->getModuleName());
-
-        $rulePath = GenerateConfigReader::read('actions');
-
-        return $path . $rulePath->getPath() . '/' . $this->getFileName() . '.php';
+        return rtrim($rootNamespace, '\\') . '\\Actions';
     }
 
     /**
      * @return string
      */
-    private function getFileName()
+    public function getClassName()
     {
-        return Str::studly($this->argument('name'));
+        $parts = explode('\\', ltrim(str_replace('/', '\\', $this->argument('name')), '\\'));
+        return $parts[count($parts) - 1];
     }
 
     /**
@@ -118,7 +132,7 @@ class MakeModuleActionCommand extends GeneratorCommand
      */
     protected function parseName()
     {
-        $className = $this->getClass();
+        $className = $this->getClassName();
         preg_match('/^(Create|Update|Delete)([A-Z][a-z0-9]+)Action$/', $className, $matches);
         if ($matches) {
             $this->actionType = mb_strtolower($matches[1]);
