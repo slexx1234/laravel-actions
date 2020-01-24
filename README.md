@@ -91,11 +91,23 @@ This generates the following code:
 
 namespace App\Actions\Users;
 
+use Auth;
 use App\User;
 use Slexx\LaravelActions\Action;
 
 class CreateUserAction extends Action
 {
+    /**
+     * Determine if the user is authorized to execute this action.
+     *
+     * @param array $data
+     * @return bool
+     */
+    public function authorize(array $data)
+    {
+        return Auth::user()->isAdmin();
+    }
+
     /**
      * @param array $data
      * @return User

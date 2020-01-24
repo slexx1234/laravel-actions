@@ -8,6 +8,17 @@ use Slexx\LaravelActions\Action;
 class $Class$ extends Action
 {
     /**
+     * Determine if the user is authorized to execute this action.
+     *
+     * @param array $data
+     * @return bool
+     */
+    public function authorize(array $data)
+    {
+        return true;
+    }
+
+    /**
      * @param array $data
      * @return $Model$
      */
